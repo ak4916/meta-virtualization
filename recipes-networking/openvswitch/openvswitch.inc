@@ -11,13 +11,13 @@ HOMEPAGE = "http://openvswitch.org/"
 SECTION = "networking"
 LICENSE = "Apache-2"
 
-DEPENDS += "openssl python perl python-six-native coreutils-native"
+DEPENDS += "openssl perl python-six-native coreutils-native"
 
 DEPENDS_append_class-target = " bridge-utils"
 
 RDEPENDS_${PN} += "util-linux-uuidgen util-linux-libuuid coreutils \
-	python perl perl-module-strict ${PN}-switch \
-        bash python-twisted python-six"
+	perl perl-module-strict ${PN}-switch \
+        bash "
 RDEPENDS_${PN}-testcontroller = "${PN} lsb ${PN}-pki"
 RDEPENDS_${PN}-switch = "${PN} openssl procps util-linux-uuidgen"
 RDEPENDS_${PN}-pki = "${PN}"
@@ -36,8 +36,6 @@ SRC_URI = "\
 	"
 
 EXTRA_OECONF += "\
-	PYTHON=python \
-	PYTHON3=python3 \
 	PERL=perl \
 	"
 CONFIGUREOPT_DEPTRACK = ""
@@ -71,7 +69,7 @@ FILES_${PN}-switch = "\
 FILES_${PN} += "${datadir}/ovsdbmonitor"
 FILES_${PN} += "/run"
 
-FILES_${PN} += "${libdir}/python${PYTHON_BASEVERSION}/"
+#FILES_${PN} += "${libdir}/python${PYTHON_BASEVERSION}/"
 inherit autotools update-rc.d systemd pythonnative perlnative
 
 SYSTEMD_PACKAGES = "${PN}-switch"
@@ -108,8 +106,8 @@ do_install_append() {
 		${D}/${systemd_unitdir}/system/ovsdb-server.service
 
 	oe_runmake modules_install INSTALL_MOD_PATH=${D}
-	install -d ${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages
-	cp -r ${S}/python/ovstest/ ${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages/
+	#install -d ${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages
+	#cp -r ${S}/python/ovstest/ ${D}${libdir}/python${PYTHON_BASEVERSION}/site-packages/
 }
 
 pkg_postinst_${PN}-pki () {
