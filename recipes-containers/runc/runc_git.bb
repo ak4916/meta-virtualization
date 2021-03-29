@@ -31,6 +31,7 @@ do_compile() {
     # use dependencies packaged independently.
  
     export GOPATH="${GOPATH}"
+    export GOROOT="${STAGING_LIBDIR_NATIVE}/${TARGET_SYS}/go"
     cd "${S}"
  
     # Pass the needed cflags/ldflags so that cgo
