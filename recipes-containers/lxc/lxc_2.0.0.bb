@@ -22,7 +22,7 @@ RDEPENDS_${BPN} = " \
 "
 RDEPENDS_${PN}-ptest += "file make"
 
-SRC_URI = "http://linuxcontainers.org/downloads/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://linuxcontainers.org/downloads/${BPN}/${BPN}-${PV}.tar.gz \
 	file://lxc-1.0.0-disable-udhcp-from-busybox-template.patch \
 	file://runtest.patch \
 	file://run-ptest \
